@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import { Card } from 'components/card';
-import { ContextAlert } from 'components/context-alert';
-import { Markdown } from 'components/markdown';
+import { Card } from '../../components/card';
+import { ContextAlert } from '../../components/context-alert';
+import { Markdown } from '../../components/markdown';
 
 export const metadata = {
     title: 'Redirects & Rewrites'

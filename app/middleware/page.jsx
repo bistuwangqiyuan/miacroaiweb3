@@ -1,5 +1,5 @@
-import { ContextAlert } from 'components/context-alert';
-import { Markdown } from 'components/markdown';
+import { ContextAlert } from '../../components/context-alert';
+import { Markdown } from '../../components/markdown';
 
 export const metadata = {
     title: 'Middleware'

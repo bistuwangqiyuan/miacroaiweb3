@@ -1,7 +1,13 @@
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactCompiler: true,
-  
+  turbopack: {
+    root: join(__dirname),
+  },
   redirects() {
     return [
       {
