@@ -1,0 +1,34 @@
+{
+  "nav": {
+    "product": "产品",
+    "technology": "技术",
+    "cases": "案例",
+    "businessModel": "商业模式",
+    "partners": "合伙人",
+    "about": "关于",
+    "contact": "联系",
+    "feedback": "反馈",
+    "login": "登录",
+    "signup": "注册",
+    "logout": "退出"
+  },
+  "footer": {
+    "about": "关于我们",
+    "contact": "联系我们",
+    "privacy": "隐私政策",
+    "terms": "使用条款",
+    "feedback": "用户反馈"
+  },
+  "home": {
+    "slogan": "数据不出域的微型算力中心",
+    "tagline": "数据全部存放在您自己的设备中，更安全、更放心。",
+    "cta": "了解更多",
+    "productEntry": "产品",
+    "caseSummary": "落地案例"
+  },
+  "common": {
+    "language": "语言",
+    "zh": "中文",
+    "en": "English"
+  }
+}
