@@ -1,0 +1,4 @@
+[    2761ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://microaiweb3.netlify.app/product/weisu%C3%A0n-p?_rsc=afbzy:0
+[    3101ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://microaiweb3.netlify.app/product/weisu%C3%A0n-b?_rsc=afbzy:0
+[    3137ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://microaiweb3.netlify.app/product/weisu%C3%A0n-e?_rsc=afbzy:0
+[   21202ms] [WARNING] The resource https://microaiweb3.netlify.app/_next/static/css/a43ec080d354ff4f.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://microaiweb3.netlify.app/product:0

@@ -22,12 +22,15 @@ const paths = [
   '/signup',
   '/privacy',
   '/terms',
-  '/product/weisuàn-b',
-  '/product/weisuàn-p',
-  '/product/weisuàn-e',
+  '/product/weisuan-b',
+  '/product/weisuan-p',
+  '/product/weisuan-e',
+  '/cases/cost-comparison',
   '/zh/about',
   '/en/about',
 ];
+
+const assistantFallback = 'Sorry, the assistant is temporarily unavailable. Please try again or browse the site directly.';
 
 async function test() {
   let failed = 0;
@@ -43,6 +46,27 @@ async function test() {
       console.log('FAIL', url, e.message);
     }
   }
+
+  const chatUrl = base.replace(/\/$/, '') + '/api/chat';
+  try {
+    const res = await fetch(chatUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: '请用一句话介绍微算-B，并告诉我应该看哪个页面。',
+        locale: 'zh',
+      }),
+    });
+    const data = await res.json();
+    const reply = typeof data.reply === 'string' ? data.reply.trim() : '';
+    const ok = res.ok && reply && reply !== assistantFallback;
+    if (!ok) failed++;
+    console.log(ok ? 'OK' : 'FAIL', 'CHAT', res.status, chatUrl, reply || '(empty)');
+  } catch (e) {
+    failed++;
+    console.log('FAIL', 'CHAT', chatUrl, e.message);
+  }
+
   console.log('');
   if (failed === 0) {
     console.log('All tests passed.');

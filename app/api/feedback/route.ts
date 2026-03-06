@@ -1,9 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { queryFeedback, insertFeedback } from '@/lib/db';
+import { queryFeedback, insertFeedback, queryLatestFeedback } from '@/lib/db';
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
+    const latest = searchParams.get('latest');
+    if (latest) {
+      const items = await queryLatestFeedback(parseInt(latest, 10) || 3);
+      return NextResponse.json({ items });
+    }
     const page = Math.max(1, parseInt(searchParams.get('page') || '1', 10));
     const pageSize = Math.min(50, Math.max(1, parseInt(searchParams.get('pageSize') || '10', 10)));
     const userId = request.headers.get('x-user-id') || 'guest';

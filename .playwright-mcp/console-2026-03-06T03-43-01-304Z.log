@@ -1,0 +1,14 @@
+[     475ms] Error: Minified React error #418; visit https://react.dev/errors/418?args[]=text&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+    at rX (https://microaiweb3.netlify.app/_next/static/chunks/4bd1b696-096d35a2bd1da3af.js:1:36653)
+    at rZ (https://microaiweb3.netlify.app/_next/static/chunks/4bd1b696-096d35a2bd1da3af.js:1:37686)
+    at https://microaiweb3.netlify.app/_next/static/chunks/4bd1b696-096d35a2bd1da3af.js:1:131586
+    at sg (https://microaiweb3.netlify.app/_next/static/chunks/4bd1b696-096d35a2bd1da3af.js:1:136748)
+    at sp (https://microaiweb3.netlify.app/_next/static/chunks/4bd1b696-096d35a2bd1da3af.js:1:128086)
+    at https://microaiweb3.netlify.app/_next/static/chunks/4bd1b696-096d35a2bd1da3af.js:1:122915
+    at sn (https://microaiweb3.netlify.app/_next/static/chunks/4bd1b696-096d35a2bd1da3af.js:1:123016)
+    at sQ (https://microaiweb3.netlify.app/_next/static/chunks/4bd1b696-096d35a2bd1da3af.js:1:149404)
+    at MessagePort.M (https://microaiweb3.netlify.app/_next/static/chunks/794-37dad9bbc14b04b8.js:1:43236)
+[     911ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://microaiweb3.netlify.app/blobs:0
+[     915ms] UnrecognizedActionError: Server Action "004ebd5e7e1f6f007ed5484f8a6097e49dafa93615" was not found on the server. 
+Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+    at j (https://microaiweb3.netlify.app/_next/static/chunks/794-37dad9bbc14b04b8.js:1:127146)

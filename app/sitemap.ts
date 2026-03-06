@@ -1,16 +1,17 @@
 import { MetadataRoute } from 'next';
 
-const base = process.env.NEXT_PUBLIC_SITE_URL || 'https://weisuàn.example.com';
+const base = process.env.NEXT_PUBLIC_SITE_URL || 'https://weisuan.example.com';
 
 const paths = [
   '',
   '/product',
-  '/product/weisuàn-b',
-  '/product/weisuàn-p',
-  '/product/weisuàn-e',
+  '/product/weisuan-b',
+  '/product/weisuan-p',
+  '/product/weisuan-e',
   '/technology',
   '/certifications',
   '/cases',
+  '/cases/cost-comparison',
   '/data',
   '/business-model',
   '/partners',

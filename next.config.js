@@ -34,6 +34,36 @@ const nextConfig = {
         destination: '/',
         permanent: true,
       },
+      {
+        source: '/product/weisuàn-b',
+        destination: '/product/weisuan-b',
+        permanent: true,
+      },
+      {
+        source: '/product/weisuàn-p',
+        destination: '/product/weisuan-p',
+        permanent: true,
+      },
+      {
+        source: '/product/weisuàn-e',
+        destination: '/product/weisuan-e',
+        permanent: true,
+      },
+      {
+        source: '/en/product/weisuàn-b',
+        destination: '/en/product/weisuan-b',
+        permanent: true,
+      },
+      {
+        source: '/en/product/weisuàn-p',
+        destination: '/en/product/weisuan-p',
+        permanent: true,
+      },
+      {
+        source: '/en/product/weisuàn-e',
+        destination: '/en/product/weisuan-e',
+        permanent: true,
+      },
     ];
   },
 
