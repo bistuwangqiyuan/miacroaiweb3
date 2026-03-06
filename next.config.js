@@ -1,10 +1,14 @@
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import createNextIntlPlugin from 'next-intl/plugin';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true,
+  images: { unoptimized: true },
   turbopack: {
     root: join(__dirname),
   },
@@ -32,7 +36,7 @@ const nextConfig = {
       },
     ];
   },
-  
+
   rewrites() {
     return [
       {
@@ -47,4 +51,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

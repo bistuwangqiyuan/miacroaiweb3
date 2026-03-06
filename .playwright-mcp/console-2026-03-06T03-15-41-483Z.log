@@ -1,0 +1,8 @@
+[   27485ms] [ERROR] Failed to fetch RSC payload for https://microaiweb3.netlify.app/revalidation. Falling back to browser navigation. Error: can't infer type of chunk from URL 633
+    at https://microaiweb3.netlify.app/_next/static/chunks/turbopack-1b57dee03e7d4187.js:4:3304
+    at Object.loadChunkCached (https://microaiweb3.netlify.app/_next/static/chunks/turbopack-1b57dee03e7d4187.js:4:3391)
+    at E (https://microaiweb3.netlify.app/_next/static/chunks/turbopack-1b57dee03e7d4187.js:1:5704)
+    at R.L (https://microaiweb3.netlify.app/_next/static/chunks/turbopack-1b57dee03e7d4187.js:1:6226)
+    at c (https://microaiweb3.netlify.app/_next/static/chunks/43e526e080420ed5.js:1:503)
+    at https://microaiweb3.netlify.app/_next/static/chunks/43e526e080420ed5.js:1:15831
+    at t (https://microaiweb3.netlify.app/_next/static/chunks/43e526e080420ed5.js:1:17312) @ https://microaiweb3.netlify.app/_next/static/chunks/4316f9e09bd83837.js:0
