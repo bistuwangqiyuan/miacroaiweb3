@@ -5,29 +5,26 @@
  */
 const base = process.argv[2] || process.env.SITE_URL || 'http://localhost:3000';
 
-const paths = [
+const zhPaths = [
   '/',
-  '/en',
   '/product',
-  '/technology',
-  '/certifications',
-  '/cases',
-  '/data',
-  '/business-model',
-  '/partners',
-  '/about',
-  '/contact',
-  '/feedback',
-  '/login',
-  '/signup',
-  '/privacy',
-  '/terms',
   '/product/weisuan-b',
   '/product/weisuan-p',
   '/product/weisuan-e',
+  '/technology',
+  '/certifications',
+  '/cases',
   '/cases/cost-comparison',
-  '/zh/about',
-  '/en/about',
+  '/about',
+  '/contact',
+  '/feedback',
+];
+
+const enPaths = zhPaths.map(p => '/en' + p);
+
+const paths = [
+  ...zhPaths,
+  ...enPaths,
 ];
 
 const assistantFallback = 'Sorry, the assistant is temporarily unavailable. Please try again or browse the site directly.';
