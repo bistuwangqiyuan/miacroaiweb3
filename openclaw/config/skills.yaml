@@ -1,0 +1,50 @@
+# Skills Configuration
+# Enable the tools each agent can use
+
+enabled_skills:
+  - browser
+  - files
+  - search
+  - code
+
+# Per-agent skill restrictions
+agent_skills:
+  gm:
+    - files
+    - code
+    # GM reads/writes strategy, orders, reports via files
+    # GM uses code/shell for emergency WeChat notifications
+  scout:
+    - browser
+    - search
+    - files
+    # Scout browses web for prospects and market intelligence
+  content:
+    - files
+    - code
+    - browser
+    # Content writes articles, publishes via API (code/shell), browses for research
+  sales:
+    - files
+    - code
+    - browser
+    # Sales reads CRM, sends emails via SendGrid (code/shell), checks replies
+  ops:
+    - files
+    - code
+    # Ops calls external APIs for stats, reads all internal data
+
+# External API integrations (configured via environment variables)
+integrations:
+  sendgrid:
+    env_key: SENDGRID_API_KEY
+    used_by: [sales, ops]
+  wechat_work:
+    env_key: WECHAT_WORK_WEBHOOK_URL
+    used_by: [gm, sales, ops]
+  baidu_analytics:
+    env_key: BAIDU_ANALYTICS_API_KEY
+    used_by: [ops]
+  website_api:
+    base_url: "${SITE_URL:-https://miacroaiweb3.netlify.app}"
+    used_by: [sales, content, ops]

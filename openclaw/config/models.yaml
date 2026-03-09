@@ -1,0 +1,45 @@
+# Model Provider Configuration
+# Configure your LLM API keys here
+
+# Primary provider for GM, Content, Sales (needs strong reasoning)
+primary:
+  provider: anthropic
+  model: claude-sonnet-4-5
+  # API key is set via: openclaw models auth setup-token --provider anthropic
+
+# Secondary provider for Scout, Ops (cost-effective for data tasks)
+secondary:
+  provider: openai
+  model: deepseek-v3
+  # If using DeepSeek directly, configure via environment:
+  # DEEPSEEK_API_KEY=your_key
+  # DEEPSEEK_BASE_URL=https://api.deepseek.com/v1
+
+# Alternative: use Ollama for fully local, zero-cost operation
+# local:
+#   provider: ollama
+#   model: llama3
+#   # Install: ollama pull llama3
+
+# Agent-specific model assignments
+agents:
+  gm:
+    model: claude-sonnet-4-5
+    reason: "Decision quality is critical - use strongest model"
+  scout:
+    model: deepseek-v3
+    reason: "Search/organize tasks don't need strong reasoning"
+  content:
+    model: claude-sonnet-4-5
+    reason: "Content quality directly impacts brand perception"
+  sales:
+    model: claude-sonnet-4-5
+    reason: "Sales communication quality directly impacts close rate"
+  ops:
+    model: deepseek-v3
+    reason: "Data aggregation and reporting is straightforward"
+
+# Budget constraints
+budget:
+  monthly_limit_cny: 2000
+  alert_threshold: 0.8
