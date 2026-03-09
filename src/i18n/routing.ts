@@ -24,5 +24,6 @@ export const routing = defineRouting({
     '/signup': '/signup',
     '/privacy': '/privacy',
     '/terms': '/terms',
+    '/blog': '/blog',
   },
 });

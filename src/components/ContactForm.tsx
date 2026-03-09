@@ -30,16 +30,29 @@ export function ContactForm({ locale }: { locale: string }) {
     setErrors({});
     setStatus('sending');
     try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        body: JSON.stringify({
-          name: data.get('name'),
-          email: data.get('email'),
-          message: data.get('message'),
+      const payload = {
+        name: data.get('name'),
+        email: data.get('email'),
+        company: data.get('company') || '',
+        industry: data.get('industry') || '',
+        size: data.get('size') || '',
+        need_type: data.get('need_type') || '',
+        message: data.get('message'),
+        source: 'website',
+      };
+      const [contactRes, leadsRes] = await Promise.all([
+        fetch('/api/contact', {
+          method: 'POST',
+          body: JSON.stringify({ name: payload.name, email: payload.email, message: payload.message }),
+          headers: { 'Content-Type': 'application/json' },
         }),
-        headers: { 'Content-Type': 'application/json' },
-      });
-      if (res.ok) {
+        fetch('/api/leads', {
+          method: 'POST',
+          body: JSON.stringify(payload),
+          headers: { 'Content-Type': 'application/json' },
+        }),
+      ]);
+      if (contactRes.ok || leadsRes.ok) {
         setStatus('done');
         form.reset();
       } else {
@@ -77,39 +90,102 @@ export function ContactForm({ locale }: { locale: string }) {
 
   return (
     <form onSubmit={submit} className="flex flex-col gap-5">
-      <div>
-        <label className="text-sm font-medium text-weisuan-black">
-          {isZh ? '姓名' : 'Name'}
-        </label>
-        <input
-          name="name"
-          required
-          className={`mt-1.5 block w-full rounded-xl border ${errors.name ? 'border-red-600' : 'border-black-10'} bg-white px-4 py-3 text-sm transition-colors focus\:outline-none focus\:ring-2`}
-          placeholder={isZh ? '请输入姓名' : 'Your name'}
-        />
-        {errors.name && <p className="mt-1 text-xs text-red-600">{errors.name}</p>}
+      <div className="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label className="text-sm font-medium text-weisuan-black">
+            {isZh ? '姓名' : 'Name'} *
+          </label>
+          <input
+            name="name"
+            required
+            className={`mt-1.5 block w-full rounded-xl border ${errors.name ? 'border-red-600' : 'border-black-10'} bg-white px-4 py-3 text-sm transition-colors focus\:outline-none focus\:ring-2`}
+            placeholder={isZh ? '请输入姓名' : 'Your name'}
+          />
+          {errors.name && <p className="mt-1 text-xs text-red-600">{errors.name}</p>}
+        </div>
+        <div>
+          <label className="text-sm font-medium text-weisuan-black">
+            {isZh ? '邮箱' : 'Email'} *
+          </label>
+          <input
+            name="email"
+            type="email"
+            required
+            className={`mt-1.5 block w-full rounded-xl border ${errors.email ? 'border-red-600' : 'border-black-10'} bg-white px-4 py-3 text-sm transition-colors focus\:outline-none focus\:ring-2`}
+            placeholder={isZh ? '请输入邮箱' : 'your@email.com'}
+          />
+          {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email}</p>}
+        </div>
       </div>
       <div>
         <label className="text-sm font-medium text-weisuan-black">
-          {isZh ? '邮箱' : 'Email'}
+          {isZh ? '公司名称' : 'Company'}
         </label>
         <input
-          name="email"
-          type="email"
-          required
-          className={`mt-1.5 block w-full rounded-xl border ${errors.email ? 'border-red-600' : 'border-black-10'} bg-white px-4 py-3 text-sm transition-colors focus\:outline-none focus\:ring-2`}
-          placeholder={isZh ? '请输入邮箱' : 'your@email.com'}
+          name="company"
+          className="mt-1.5 block w-full rounded-xl border border-black-10 bg-white px-4 py-3 text-sm transition-colors focus:outline-none focus:ring-2"
+          placeholder={isZh ? '请输入公司名称' : 'Your company name'}
         />
-        {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email}</p>}
+      </div>
+      <div className="grid gap-5 sm:grid-cols-3">
+        <div>
+          <label className="text-sm font-medium text-weisuan-black">
+            {isZh ? '行业' : 'Industry'}
+          </label>
+          <select
+            name="industry"
+            className="mt-1.5 block w-full rounded-xl border border-black-10 bg-white px-4 py-3 text-sm transition-colors focus:outline-none focus:ring-2"
+          >
+            <option value="">{isZh ? '请选择' : 'Select'}</option>
+            <option value="manufacturing">{isZh ? '制造业' : 'Manufacturing'}</option>
+            <option value="education">{isZh ? '教育/高校' : 'Education'}</option>
+            <option value="healthcare">{isZh ? '医疗健康' : 'Healthcare'}</option>
+            <option value="finance">{isZh ? '金融' : 'Finance'}</option>
+            <option value="automotive">{isZh ? '汽车' : 'Automotive'}</option>
+            <option value="it">{isZh ? 'IT/系统集成' : 'IT/Integration'}</option>
+            <option value="government">{isZh ? '政府/公共' : 'Government'}</option>
+            <option value="other">{isZh ? '其他' : 'Other'}</option>
+          </select>
+        </div>
+        <div>
+          <label className="text-sm font-medium text-weisuan-black">
+            {isZh ? '企业规模' : 'Company Size'}
+          </label>
+          <select
+            name="size"
+            className="mt-1.5 block w-full rounded-xl border border-black-10 bg-white px-4 py-3 text-sm transition-colors focus:outline-none focus:ring-2"
+          >
+            <option value="">{isZh ? '请选择' : 'Select'}</option>
+            <option value="1-50">{isZh ? '1-50人' : '1-50'}</option>
+            <option value="50-200">{isZh ? '50-200人' : '50-200'}</option>
+            <option value="200-1000">{isZh ? '200-1000人' : '200-1000'}</option>
+            <option value="1000+">{isZh ? '1000人以上' : '1000+'}</option>
+          </select>
+        </div>
+        <div>
+          <label className="text-sm font-medium text-weisuan-black">
+            {isZh ? '需求类型' : 'Inquiry Type'}
+          </label>
+          <select
+            name="need_type"
+            className="mt-1.5 block w-full rounded-xl border border-black-10 bg-white px-4 py-3 text-sm transition-colors focus:outline-none focus:ring-2"
+          >
+            <option value="">{isZh ? '请选择' : 'Select'}</option>
+            <option value="product">{isZh ? '产品咨询' : 'Product Inquiry'}</option>
+            <option value="trial">{isZh ? '试用申请' : 'Trial Request'}</option>
+            <option value="partner">{isZh ? '合伙人加盟' : 'Partnership'}</option>
+            <option value="tech">{isZh ? '技术合作' : 'Technical Cooperation'}</option>
+          </select>
+        </div>
       </div>
       <div>
         <label className="text-sm font-medium text-weisuan-black">
-          {isZh ? '留言' : 'Message'}
+          {isZh ? '留言' : 'Message'} *
         </label>
         <textarea
           name="message"
           required
-          rows={5}
+          rows={4}
           className={`mt-1.5 block w-full rounded-xl border ${errors.message ? 'border-red-600' : 'border-black-10'} bg-white px-4 py-3 text-sm transition-colors focus\:outline-none focus\:ring-2`}
           placeholder={isZh ? '请输入留言内容（至少10个字符）' : 'Your message (at least 10 characters)'}
         />

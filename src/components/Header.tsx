@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { Link, usePathname } from '@/i18n/navigation';
 
-const navKeys = ['product', 'technology', 'cases', 'certifications', 'businessModel', 'partners', 'feedback', 'about', 'contact'] as const;
+const navKeys = ['product', 'technology', 'cases', 'certifications', 'businessModel', 'partners', 'blog', 'about', 'contact'] as const;
 const pathMap: Record<string, string> = {
   product: '/product',
   technology: '/technology',
@@ -12,7 +12,7 @@ const pathMap: Record<string, string> = {
   certifications: '/certifications',
   businessModel: '/business-model',
   partners: '/partners',
-  feedback: '/feedback',
+  blog: '/blog',
   about: '/about',
   contact: '/contact',
 };
