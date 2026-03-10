@@ -20,8 +20,8 @@ export default async function ProductPage({ params }: { params: Promise<{ locale
         { labelZh: '网络', labelEn: 'Network', value: '25G/100G' },
         { labelZh: '算力', labelEn: 'Output', value: isZh ? '可达1 PFLOPS' : 'Up to 1 PFLOPS' },
       ],
-      priceZh: '约5万元（试点期免费赠送）',
-      priceEn: '~¥50K (free during pilot)',
+      priceZh: '约9.8万元（试点期免费赠送）',
+      priceEn: '~¥98K (free during pilot)',
       leaseZh: '融资租赁：2,000元/月',
       leaseEn: 'Leasing: ¥2,000/mo',
       badge: isZh ? '推荐试点' : 'Pilot',
@@ -167,7 +167,7 @@ export default async function ProductPage({ params }: { params: Promise<{ locale
               </thead>
               <tbody>
                 {[
-                  { stage: isZh ? '单台微算' : 'Single Unit', scale: '1', compute: '1 PFLOPS', cost: isZh ? '5万元（免费赠送）' : '¥50K (free)' },
+                  { stage: isZh ? '单台微算' : 'Single Unit', scale: '1', compute: '1 PFLOPS', cost: isZh ? '9.8万元（免费赠送）' : '¥98K (free)' },
                   { stage: isZh ? '小型集群' : 'Small Cluster', scale: '5-10', compute: '40-80 PFLOPS', cost: '¥4-8M' },
                   { stage: isZh ? '中型集群' : 'Medium Cluster', scale: '50-100', compute: '400-800 PFLOPS', cost: '¥40-80M' },
                   { stage: isZh ? '大型集群' : 'Large Cluster', scale: '500-1000', compute: '4-8 EFLOPS', cost: '¥4-8亿' },

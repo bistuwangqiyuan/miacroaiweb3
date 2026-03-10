@@ -120,7 +120,7 @@ export default async function HomePage() {
           <p className="mt-4 max-w-2xl text-weisuan-gray leading-relaxed">{t('productDesc')}</p>
           <div className="mt-12 grid gap-8 sm:grid-cols-3">
             {[
-              { href: '/product', name: '微算-B', sub: 'Basic', spec: '1 PFLOPS', price: '~¥5万', img: '/image/微算产品图1.jpg' },
+              { href: '/product', name: '微算-B', sub: 'Basic', spec: '1 PFLOPS', price: '~¥9.8万', img: '/image/微算产品图1.jpg' },
               { href: '/product', name: '微算-P', sub: 'Professional', spec: '12 PFLOPS', price: '¥200-500万', img: '/image/微算产品图2.jpg' },
               { href: '/product', name: '微算-E', sub: 'Enterprise', spec: '50+ PFLOPS', price: '¥500万+', img: '/image/微算产品图3.png' },
             ].map((p) => (
