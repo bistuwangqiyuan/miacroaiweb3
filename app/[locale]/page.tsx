@@ -262,19 +262,31 @@ export default async function HomePage() {
           <p className="mt-4 max-w-2xl text-weisuan-gray leading-relaxed">{t('caseDesc')}</p>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { client: '北京信息科技大学', deploy: '72h', outcome: '百人并发，85%利用率，获奖率+30%' },
-              { client: '华为算力中心', deploy: '48h', outcome: '数据互通+30%，模型加载缩短72%' },
-              { client: '中国移动', deploy: '—', outcome: '已签100万+微算设备合同' },
-              { client: '亚信科技', deploy: '—', outcome: '定制多套微算行业解决方案' },
+              { icon: '🎓', client: '北京信息科技大学', deploy: '72h', outcome: '百人并发AI实训，设备利用率85%，竞赛获奖率+30%' },
+              { icon: '🏢', client: '华为算力中心', deploy: '48h', outcome: '数据互通+30%，模型加载缩短72%，昇腾+鲲鹏双认证' },
+              { icon: '📡', client: '中国移动', deploy: '—', outcome: '央企客户标杆，已签订100万+微算设备合同' },
+              { icon: '🔧', client: '亚信科技', deploy: '—', outcome: 'OEM集成合作，定制多套微算行业解决方案' },
+              { icon: '🏥', client: '某三甲医院', deploy: '48h', outcome: '医学影像AI辅助诊断，阅片效率+40%，数据零出院' },
+              { icon: '🏭', client: '某汽车零部件企业', deploy: '72h', outcome: 'AI视觉质检，缺陷检出率99.2%，年省180万退货损失' },
+              { icon: '🏦', client: '某城市商业银行', deploy: '1周', outcome: 'AI反欺诈+风控，月成本仅4千元，满足金融合规要求' },
+              { icon: '⚡', client: '某新能源电力集团', deploy: '48h', outcome: '风电预测性维护，故障提前72h预警，停机减少45%' },
             ].map((c, i) => (
               <div key={i} className="card-hover rounded-2xl bg-white p-6">
-                <p className="text-lg font-semibold text-weisuan-black">{c.client}</p>
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">{c.icon}</span>
+                  <p className="text-lg font-semibold text-weisuan-black">{c.client}</p>
+                </div>
                 {c.deploy !== '—' && (
                   <p className="mt-2 text-xs font-medium text-weisuan-accent">{c.deploy} deployment</p>
                 )}
                 <p className="mt-3 text-sm text-weisuan-gray leading-relaxed">{c.outcome}</p>
               </div>
             ))}
+          </div>
+          <div className="mt-10 text-center">
+            <a href="/cases" className="inline-flex items-center rounded-full border border-black-10 px-6 py-3 text-sm font-semibold text-weisuan-black transition-colors hover:border-weisuan-accent-30 hover:text-weisuan-accent">
+              {t('viewAllCases')} →
+            </a>
           </div>
         </div>
       </section>
