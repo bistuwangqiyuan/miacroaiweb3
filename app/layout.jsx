@@ -2,7 +2,7 @@ import Script from 'next/script';
 import '../styles/globals.css';
 import './globals.css';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.URL || 'https://miacroaiweb3.netlify.app';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.URL || 'https://microaiweb3.netlify.app';
 
 export const metadata = {
     title: {
