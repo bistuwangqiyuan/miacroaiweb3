@@ -2,10 +2,25 @@ import { setRequestLocale } from 'next-intl/server';
 import { ContactForm } from '@/components/ContactForm';
 import { queryLatestFeedback } from '@/lib/db';
 import Image from 'next/image';
+import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo';
 
 type FeedbackItem = { id: number; content: string; locale: string; created_at: string };
 
 export const dynamic = 'force-dynamic';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return buildPageMetadata(locale, '/contact', {
+    title: '联系我们',
+    description: '联系微算，了解数据不出域的微型算力中心解决方案。融资租赁2,000元/月起，48-72小时极速部署。',
+    keywords: '联系微算,咨询算力,获取报价,免费试用',
+  }, {
+    title: 'Contact Us',
+    description: 'Contact Weisuàn for data-sovereign micro computing solutions. Leasing from ¥2,000/month, 48-72h deployment.',
+    keywords: 'contact Weisuàn,computing consultation,get a quote,free trial',
+  });
+}
 
 export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

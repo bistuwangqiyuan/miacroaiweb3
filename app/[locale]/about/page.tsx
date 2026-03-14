@@ -1,5 +1,20 @@
 import { setRequestLocale } from 'next-intl/server';
 import Image from 'next/image';
+import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return buildPageMetadata(locale, '/about', {
+    title: '关于我们',
+    description: '微算团队由来自华为、百度等顶尖企业的技术专家组成，拥有完全自主知识产权的存算分离架构和EBOF全闪存储技术。',
+    keywords: '微算团队,关于微算,技术团队,自主知识产权',
+  }, {
+    title: 'About Us',
+    description: 'Weisuàn team comprises experts from Huawei, Baidu and other leading companies. Fully proprietary compute-storage disaggregation and EBOF technology.',
+    keywords: 'about Weisuàn,team,proprietary technology',
+  });
+}
 
 export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

@@ -1,4 +1,16 @@
+import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
+import { buildPageMetadata } from '@/lib/seo';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return buildPageMetadata(
+    locale,
+    '/partners',
+    { title: '合作伙伴', description: '微算与华为、北京大学、中国移动、寒武纪、NVIDIA、亚信科技等行业领导者建立深度合作。', keywords: '微算合作伙伴,华为合作,北京大学,中国移动,NVIDIA,寒武纪' },
+    { title: 'Partners', description: 'Weisuàn partners with Huawei, Peking University, China Mobile, Cambricon, NVIDIA, AsiaInfo and other industry leaders.', keywords: 'partners,Huawei,Peking University,China Mobile,NVIDIA,Cambricon' },
+  );
+}
 
 export default async function PartnersPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

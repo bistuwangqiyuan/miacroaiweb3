@@ -1,6 +1,21 @@
 import { setRequestLocale } from 'next-intl/server';
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
+import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return buildPageMetadata(locale, '/certifications', {
+    title: '资质认证',
+    description: '微算获得华为昇腾+鲲鹏双认证、多项国家专利和行业认证，经过验证的技术实力与产品品质。',
+    keywords: '华为昇腾认证,鲲鹏认证,国家专利,行业认证,算力认证',
+  }, {
+    title: 'Certifications',
+    description: 'Weisuàn certified by Huawei Ascend+Kunpeng, with multiple national patents and industry certifications. Proven technology and product quality.',
+    keywords: 'Huawei Ascend,Kunpeng certification,patents,industry certification',
+  });
+}
 
 export default async function CertificationsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

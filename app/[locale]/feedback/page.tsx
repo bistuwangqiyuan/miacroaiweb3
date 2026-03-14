@@ -1,10 +1,25 @@
 import { setRequestLocale } from 'next-intl/server';
 import { FeedbackSection } from '@/components/FeedbackSection';
 import { queryLatestFeedback } from '@/lib/db';
+import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo';
 
 type FeedbackItem = { id: number; content: string; locale: string; created_at: string };
 
 export const dynamic = 'force-dynamic';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return buildPageMetadata(locale, '/feedback', {
+    title: '反馈建议',
+    description: '向微算提交您的反馈、建议或问题，帮助我们不断改进产品和服务。',
+    keywords: '微算反馈,建议,用户反馈',
+  }, {
+    title: 'Feedback',
+    description: 'Submit your feedback, suggestions or questions to Weisuàn. Help us continuously improve our products and services.',
+    keywords: 'feedback,suggestions,user feedback',
+  });
+}
 
 export default async function FeedbackPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

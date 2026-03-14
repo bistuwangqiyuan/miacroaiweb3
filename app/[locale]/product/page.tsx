@@ -1,6 +1,22 @@
 import { Link } from '@/i18n/navigation';
 import { setRequestLocale } from 'next-intl/server';
 import Image from 'next/image';
+import type { Metadata } from 'next';
+import { buildPageMetadata, buildProductJsonLd, buildBreadcrumbJsonLd, SITE_URL } from '@/lib/seo';
+import { JsonLd } from '@/components/JsonLd';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return buildPageMetadata(locale, '/product', {
+    title: '产品矩阵',
+    description: '微算产品矩阵：微算-B基础版(1 PFLOPS)、微算-P专业版(12 PFLOPS)、微算-E企业版(50+ PFLOPS)。开箱即用，线性扩展，数据不出域。',
+    keywords: '微算产品,微算-B,微算-P,微算-E,算力设备,AI服务器,微型算力中心',
+  }, {
+    title: 'Product Lineup',
+    description: 'Weisuàn product lineup: Basic (1 PFLOPS), Professional (12 PFLOPS), Enterprise (50+ PFLOPS). Turnkey deployment, linear scaling, data stays local.',
+    keywords: 'Weisuàn products,computing hardware,AI server,micro computing,PFLOPS',
+  });
+}
 
 export default async function ProductPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -67,8 +83,27 @@ export default async function ProductPage({ params }: { params: Promise<{ locale
     },
   ];
 
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+    { name: isZh ? '首页' : 'Home', url: SITE_URL },
+    { name: isZh ? '产品' : 'Products', url: `${SITE_URL}${isZh ? '' : '/en'}/product` },
+  ]);
+  const productsJsonLd = products.map((p) =>
+    buildProductJsonLd(locale, {
+      name: `${p.name} ${p.sub}`,
+      description: isZh ? p.descZh : p.descEn,
+      image: p.img,
+      sku: p.name.replace('微算-', 'WEISUAN-'),
+      specs: p.specs[3]?.value ?? '',
+      ...(p.priceZh.includes('9.8') ? { priceCurrency: 'CNY', price: '98000' } : {}),
+    }),
+  );
+
   return (
     <div>
+      <JsonLd data={breadcrumbJsonLd} />
+      {productsJsonLd.map((p, i) => (
+        <JsonLd key={i} data={p} />
+      ))}
       <section className="bg-weisuan-black text-white py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-12 md:grid-cols-2 items-center">

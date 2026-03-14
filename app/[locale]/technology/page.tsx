@@ -1,6 +1,21 @@
 import { setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
+import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return buildPageMetadata(locale, '/technology', {
+    title: '核心技术',
+    description: '微算两大核心技术：存算分离架构和EBOF全闪存储。IOPS≥1,000,000、带宽≥56GB/s、延迟≤100μs、可靠性99.9999%。完全自主知识产权。',
+    keywords: '存算分离,EBOF全闪存储,NVMe,RDMA,高性能存储,自主知识产权',
+  }, {
+    title: 'Core Technology',
+    description: 'Two core technologies: compute-storage disaggregation and EBOF all-flash storage. IOPS≥1M, bandwidth≥56GB/s, latency≤100μs, 99.9999% reliability. Fully proprietary IP.',
+    keywords: 'compute-storage disaggregation,EBOF,NVMe,RDMA,high-performance storage,proprietary IP',
+  });
+}
 
 export default async function TechnologyPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

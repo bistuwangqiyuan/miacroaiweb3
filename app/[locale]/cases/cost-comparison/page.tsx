@@ -1,4 +1,6 @@
+import type { Metadata } from 'next';
 import { Link } from '@/i18n/navigation';
+import { buildPageMetadata } from '@/lib/seo';
 import { setRequestLocale } from 'next-intl/server';
 
 const enterpriseComparison = [
@@ -78,6 +80,16 @@ const lightComparison = [
     leasing: '数据不出域',
   },
 ];
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return buildPageMetadata(
+    locale,
+    '/cases/cost-comparison',
+    { title: '降本对比', description: '微算与公有云、传统自建方案的三年TCO对比分析。微算本地化算力方案成本降低40%-70%，数据不出域更安全。', keywords: '算力成本对比,TCO分析,公有云对比,降本增效,微算性价比' },
+    { title: 'Cost Comparison', description: 'Weisuàn vs public cloud vs traditional on-premise: 3-year TCO comparison. 40-70% cost reduction with local data sovereignty.', keywords: 'cost comparison,TCO analysis,cloud vs on-premise,cost reduction' },
+  );
+}
 
 export default async function CostComparisonCasePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

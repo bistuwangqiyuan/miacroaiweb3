@@ -1,4 +1,16 @@
+import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
+import { buildPageMetadata } from '@/lib/seo';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return buildPageMetadata(
+    locale,
+    '/business-model',
+    { title: '商业模式', description: '微算共享算力商业模式：零加盟费成为事业合伙人，免费获得100套微算设备，价值500万元。融资租赁2,000元/月起。', keywords: '微算商业模式,事业合伙人,加盟,免费设备,融资租赁,共享算力' },
+    { title: 'Business Model', description: 'Weisuàn shared computing model: zero franchise fee, 100 free units (worth ¥5M). Become a partner. Leasing from ¥2,000/month.', keywords: 'business model,partner program,franchise,free equipment,computing leasing' },
+  );
+}
 
 export default async function BusinessModelPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

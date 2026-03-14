@@ -1,5 +1,7 @@
 import { setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
+import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo';
 
 type BlogPost = {
   id: number;
@@ -22,6 +24,19 @@ async function getBlogPosts(locale: string): Promise<BlogPost[]> {
   } catch {
     return [];
   }
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return buildPageMetadata(locale, '/blog', {
+    title: '博客',
+    description: '微算行业洞察与技术分享：数据不出域、边缘AI、微型算力中心的最新趋势、技术解析和落地案例。',
+    keywords: '微算博客,技术分享,行业洞察,AI趋势,边缘计算',
+  }, {
+    title: 'Blog',
+    description: 'Weisuàn insights and technical sharing: latest trends in edge AI, data sovereignty, and micro computing.',
+    keywords: 'blog,technical insights,AI trends,edge computing',
+  });
 }
 
 export default async function BlogPage({ params }: { params: Promise<{ locale: string }> }) {

@@ -1,5 +1,7 @@
+import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
+import { buildPageMetadata } from '@/lib/seo';
 
 type CaseStudy = {
   id: string;
@@ -284,6 +286,16 @@ const caseStudies: CaseStudy[] = [
 
 const industries = ['全部', '教育 · 高校', 'ICT · 算力基础设施', '通信 · 央企', 'IT服务 · 系统集成', '医疗健康', '智能制造', '金融', '政务 · 智慧城市', '能源 · 电力', 'AI · 创业公司'];
 const industriesEn = ['All', 'Education', 'ICT Infrastructure', 'Telecom', 'IT Services', 'Healthcare', 'Manufacturing', 'Finance', 'Government', 'Energy', 'AI Startup'];
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return buildPageMetadata(
+    locale,
+    '/cases',
+    { title: '客户案例', description: '微算在教育、医疗、金融、制造等行业的真实落地案例。北京信息科技大学、华为、中国移动等标杆客户。72小时极速部署，显著降本增效。', keywords: '微算案例,AI落地,华为合作,中国移动,智能制造,医疗AI' },
+    { title: 'Case Studies', description: 'Real-world Weisuàn deployments across education, healthcare, finance, manufacturing. 72h rapid deployment with significant cost reduction.', keywords: 'case studies,AI deployment,Huawei,China Mobile,smart manufacturing,healthcare AI' },
+  );
+}
 
 export default async function CasesPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

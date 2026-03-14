@@ -1,4 +1,19 @@
 import { setRequestLocale } from 'next-intl/server';
+import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return buildPageMetadata(locale, '/privacy', {
+    title: '隐私政策',
+    description: '微算隐私政策，了解我们如何收集、使用和保护您的个人信息。',
+    keywords: '隐私政策,数据保护,个人信息',
+  }, {
+    title: 'Privacy Policy',
+    description: 'Weisuàn privacy policy. Learn how we collect, use and protect your personal information.',
+    keywords: 'privacy policy,data protection,personal information',
+  });
+}
 
 export default async function PrivacyPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

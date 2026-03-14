@@ -1,4 +1,19 @@
 import { setRequestLocale } from 'next-intl/server';
+import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return buildPageMetadata(locale, '/terms', {
+    title: '使用条款',
+    description: '微算网站和服务使用条款。',
+    keywords: '使用条款,服务条款',
+  }, {
+    title: 'Terms of Use',
+    description: 'Weisuàn website and service terms of use.',
+    keywords: 'terms of use,service terms',
+  });
+}
 
 export default async function TermsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

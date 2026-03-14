@@ -2,6 +2,9 @@ import { setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Markdown from 'markdown-to-jsx';
+import type { Metadata } from 'next';
+import { SITE_URL, buildArticleJsonLd, buildBreadcrumbJsonLd } from '@/lib/seo';
+import { JsonLd } from '@/components/JsonLd';
 
 type BlogPost = {
   id: number;
@@ -26,6 +29,46 @@ async function getBlogPost(slug: string): Promise<BlogPost | null> {
   }
 }
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string; slug: string }>;
+}): Promise<Metadata> {
+  const { locale, slug } = await params;
+  const isZh = locale === 'zh';
+  const post = await getBlogPost(slug);
+  if (!post) {
+    return { title: isZh ? '文章未找到' : 'Post Not Found' };
+  }
+  const url = `${SITE_URL}${isZh ? '' : '/en'}/blog/${slug}`;
+  return {
+    title: post.title,
+    description: post.summary || post.title,
+    keywords: post.keywords,
+    alternates: {
+      canonical: url,
+      languages: {
+        'zh-CN': `${SITE_URL}/blog/${slug}`,
+        en: `${SITE_URL}/en/blog/${slug}`,
+      },
+    },
+    openGraph: {
+      title: post.title,
+      description: post.summary || post.title,
+      url,
+      type: 'article',
+      publishedTime: post.created_at,
+      siteName: '微算 Weisuàn',
+      locale: isZh ? 'zh_CN' : 'en_US',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.summary || post.title,
+    },
+  };
+}
+
 export default async function BlogPostPage({
   params,
 }: {
@@ -38,8 +81,24 @@ export default async function BlogPostPage({
 
   if (!post) notFound();
 
+  const articleUrl = `${SITE_URL}${isZh ? '' : '/en'}/blog/${slug}`;
+  const articleJsonLd = buildArticleJsonLd({
+    title: post.title,
+    description: post.summary || post.title,
+    url: articleUrl,
+    datePublished: post.created_at,
+    keywords: post.keywords,
+  });
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+    { name: isZh ? '首页' : 'Home', url: SITE_URL },
+    { name: isZh ? '博客' : 'Blog', url: `${SITE_URL}${isZh ? '' : '/en'}/blog` },
+    { name: post.title, url: articleUrl },
+  ]);
+
   return (
     <div>
+      <JsonLd data={articleJsonLd} />
+      <JsonLd data={breadcrumbJsonLd} />
       <section className="bg-weisuan-black text-white py-16">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <Link href={`/${locale}/blog`} className="text-sm text-white-60 hover:text-white transition-colors">

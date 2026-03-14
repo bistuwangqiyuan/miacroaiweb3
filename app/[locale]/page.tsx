@@ -1,12 +1,78 @@
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
+import type { Metadata } from 'next';
+import { buildPageMetadata, buildFaqJsonLd, buildProductJsonLd, SITE_URL } from '@/lib/seo';
+import { JsonLd } from '@/components/JsonLd';
 
-export default async function HomePage() {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return buildPageMetadata(locale, '', {
+    title: '微算 — 数据不出域的微型算力中心',
+    description: '微算提供数据不出域的可扩展微型算力中心，存算分离架构+EBOF全闪存储，支持AI推理训练。融资租赁仅需2,000元/月，48-72小时快速部署。',
+    keywords: '微算,数据不出域,算力中心,AI推理,存算分离,EBOF全闪存储,融资租赁,边缘计算',
+  }, {
+    title: 'Weisuàn — Data-Sovereign Micro Computing Center',
+    description: 'Weisuàn delivers scalable micro computing centers with compute-storage disaggregation and EBOF all-flash storage. AI inference & training, 48-72h deployment, leasing from ¥2,000/month.',
+    keywords: 'Weisuàn,data sovereignty,micro computing,AI inference,EBOF storage,edge AI,compute leasing',
+  });
+}
+
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   const t = await getTranslations('home');
+  const isZh = locale === 'zh';
+
+  const faqJsonLd = buildFaqJsonLd(
+    isZh
+      ? [
+          { question: '什么是微算？', answer: '微算是数据不出域的可扩展微型算力中心，采用存算分离架构和EBOF全闪存储技术，支持AI推理和训练，48-72小时快速部署。' },
+          { question: '微算的价格是多少？', answer: '微算-B基础版约9.8万元（试点期免费赠送），融资租赁仅需2,000元/月。微算-P专业版200-500万元，微算-E企业版500万元以上。' },
+          { question: '微算的部署周期是多长？', answer: '微算支持48-72小时极速部署，开箱即用，一键启动。无需专业机房，普通办公环境即可运行。' },
+          { question: '微算如何保障数据安全？', answer: '微算的核心理念是"数据不出域"，所有计算和存储都在本地完成，数据不上云不外传，完全保障数据主权和隐私安全。' },
+          { question: '微算支持哪些行业应用？', answer: '微算广泛应用于智能制造、医疗健康、金融、汽车、教育等行业，支持AI推理、视觉质检、影像诊断、智能风控等场景。' },
+        ]
+      : [
+          { question: 'What is Weisuàn?', answer: 'Weisuàn is a data-sovereign, scalable micro computing center using compute-storage disaggregation and EBOF all-flash storage. Supports AI inference and training with 48-72h deployment.' },
+          { question: 'How much does Weisuàn cost?', answer: 'Weisuàn-B Basic starts at ~¥98K (free during pilot), leasing from ¥2,000/month. Professional ¥2-5M, Enterprise ¥5M+ custom.' },
+          { question: 'How fast can Weisuàn be deployed?', answer: 'Weisuàn supports 48-72h rapid deployment, plug-and-play, one-click start. No specialized data center needed.' },
+          { question: 'How does Weisuàn ensure data security?', answer: 'Weisuàn\'s core principle is "data stays local" — all compute and storage happens on-premise. No cloud upload, full data sovereignty.' },
+          { question: 'What industries does Weisuàn serve?', answer: 'Weisuàn serves manufacturing, healthcare, finance, automotive, education and more. Supports AI inference, visual inspection, medical imaging, risk control.' },
+        ],
+  );
+
+  const productsJsonLd = [
+    buildProductJsonLd(locale, {
+      name: isZh ? '微算-B 基础版' : 'Weisuàn-B Basic',
+      description: isZh ? '小型AI推理、数据分析、教学实训。开箱即用，48-72小时部署。' : 'Small-scale AI inference, data analysis, training. Plug-and-play, 48-72h deployment.',
+      image: '/image/微算产品图1.jpg',
+      sku: 'WEISUAN-B',
+      specs: '1 PFLOPS',
+      priceCurrency: 'CNY',
+      price: '98000',
+    }),
+    buildProductJsonLd(locale, {
+      name: isZh ? '微算-P 专业版' : 'Weisuàn-P Professional',
+      description: isZh ? '中型AI训练与推理、工业边缘计算。多节点集群，按需扩展。' : 'Mid-scale AI training & inference, industrial edge computing. Multi-node cluster.',
+      image: '/image/微算产品图2.jpg',
+      sku: 'WEISUAN-P',
+      specs: '12 PFLOPS',
+    }),
+    buildProductJsonLd(locale, {
+      name: isZh ? '微算-E 企业版' : 'Weisuàn-E Enterprise',
+      description: isZh ? '大规模模型训练、高性能计算。千卡级异构集群，PB级分布式存储。' : 'Large-scale model training, HPC. 1000+ card cluster, PB-scale storage.',
+      image: '/image/微算产品图3.png',
+      sku: 'WEISUAN-E',
+      specs: '50+ PFLOPS',
+    }),
+  ];
 
   return (
     <div>
+      <JsonLd data={faqJsonLd} />
+      {productsJsonLd.map((p, i) => (
+        <JsonLd key={i} data={p} />
+      ))}
       {/* Hero */}
       <section className="relative overflow-hidden hero-gradient text-white">
         <div className="hero-gradient-orb" style={{ width: '600px', height: '600px', top: '-200px', right: '-100px', background: '#0071e3' }} />
