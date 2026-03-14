@@ -138,16 +138,12 @@ export function buildProductJsonLd(
       name: isZh ? '算力输出' : 'Computing Output',
       value: product.specs,
     },
-    ...(product.price && product.priceCurrency
-      ? {
-          offers: {
-            '@type': 'Offer',
-            priceCurrency: product.priceCurrency,
-            price: product.price,
-            availability: 'https://schema.org/InStock',
-          },
-        }
-      : {}),
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: product.priceCurrency ?? 'CNY',
+      price: product.price ?? '0',
+      availability: 'https://schema.org/InStock',
+    },
   };
 }
 

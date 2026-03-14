@@ -57,6 +57,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       image: '/image/微算产品图2.jpg',
       sku: 'WEISUAN-P',
       specs: '12 PFLOPS',
+      priceCurrency: 'CNY',
+      price: '2000000',
     }),
     buildProductJsonLd(locale, {
       name: isZh ? '微算-E 企业版' : 'Weisuàn-E Enterprise',
@@ -64,6 +66,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       image: '/image/微算产品图3.png',
       sku: 'WEISUAN-E',
       specs: '50+ PFLOPS',
+      priceCurrency: 'CNY',
+      price: '5000000',
     }),
   ];
 
