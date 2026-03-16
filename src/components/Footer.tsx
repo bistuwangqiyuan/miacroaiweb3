@@ -59,6 +59,12 @@ export function Footer() {
               <li><Link href="/contact" className="text-sm text-weisuan-gray hover:text-weisuan-black">{tNav('contact')}</Link></li>
               <li><Link href="/feedback" className="text-sm text-weisuan-gray hover:text-weisuan-black">{t('feedback')}</Link></li>
             </ul>
+
+            <h3 className="mt-6 text-sm font-semibold text-weisuan-black">{t('legal')}</h3>
+            <ul className="mt-4 space-y-3">
+              <li><Link href="/privacy" className="text-sm text-weisuan-gray hover:text-weisuan-black">{t('privacy')}</Link></li>
+              <li><Link href="/terms" className="text-sm text-weisuan-gray hover:text-weisuan-black">{t('terms')}</Link></li>
+            </ul>
           </div>
         </div>
 
@@ -66,6 +72,10 @@ export function Footer() {
           <p className="text-xs text-weisuan-gray">
             © {new Date().getFullYear()} {t('companyName')}. All rights reserved.
           </p>
+          <div className="flex gap-4">
+            <Link href="/privacy" className="text-xs text-weisuan-gray hover:text-weisuan-black">{t('privacy')}</Link>
+            <Link href="/terms" className="text-xs text-weisuan-gray hover:text-weisuan-black">{t('terms')}</Link>
+          </div>
         </div>
       </div>
     </footer>

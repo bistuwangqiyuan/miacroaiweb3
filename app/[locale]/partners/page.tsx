@@ -50,9 +50,9 @@ export default async function PartnersPage({ params }: { params: Promise<{ local
               </tr>
             </thead>
             <tbody>
-              <tr className="border-b border-black-10"><td className="py-3 pr-4">华为</td><td className="py-3">昇腾+鲲鹏双认证</td></tr>
-              <tr className="border-b border-black-10"><td className="py-3 pr-4">寒武纪</td><td className="py-3">MLU370适配</td></tr>
-              <tr className="border-b border-black-10"><td className="py-3 pr-4">英伟达</td><td className="py-3">A100平台优化</td></tr>
+              <tr className="border-b border-black-10"><td className="py-3 pr-4">{isZh ? '华为' : 'Huawei'}</td><td className="py-3">{isZh ? '昇腾+鲲鹏双认证' : 'Ascend + Kunpeng Dual Certification'}</td></tr>
+              <tr className="border-b border-black-10"><td className="py-3 pr-4">{isZh ? '寒武纪' : 'Cambricon'}</td><td className="py-3">{isZh ? 'MLU370适配' : 'MLU370 Adaptation'}</td></tr>
+              <tr className="border-b border-black-10"><td className="py-3 pr-4">{isZh ? '英伟达' : 'NVIDIA'}</td><td className="py-3">{isZh ? 'A100平台优化' : 'A100 Platform Optimization'}</td></tr>
             </tbody>
           </table>
         </div>

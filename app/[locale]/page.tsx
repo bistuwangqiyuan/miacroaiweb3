@@ -274,16 +274,16 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </div>
           <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { value: '0', unit: '元', label: '加盟费', labelEn: 'Franchise Fee' },
-              { value: '100', unit: '套', label: '免费微算设备', labelEn: 'Free Units' },
-              { value: '500', unit: '万', label: '设备价值', labelEn: 'Equipment Value' },
-              { value: '2000', unit: '元/月', label: '融资租赁起步', labelEn: 'Leasing from' },
+              { value: '0', unitZh: '元', unitEn: '¥', labelZh: '加盟费', labelEn: 'Franchise Fee' },
+              { value: '100', unitZh: '套', unitEn: 'units', labelZh: '免费微算设备', labelEn: 'Free Weisuàn Units' },
+              { value: '500', unitZh: '万', unitEn: '万 (~$700K)', labelZh: '设备价值', labelEn: 'Equipment Value' },
+              { value: '2000', unitZh: '元/月', unitEn: '¥/mo', labelZh: '融资租赁起步', labelEn: 'Leasing from' },
             ].map((item, i) => (
               <div key={i} className="stat-card text-center">
                 <p className="text-3xl font-bold text-white tracking-tight">
-                  {item.value}<span className="text-sm font-normal text-white-60 ml-1">{item.unit}</span>
+                  {item.value}<span className="text-sm font-normal text-white-60 ml-1">{isZh ? item.unitZh : item.unitEn}</span>
                 </p>
-                <p className="mt-2 text-sm text-white-60">{item.label}</p>
+                <p className="mt-2 text-sm text-white-60">{isZh ? item.labelZh : item.labelEn}</p>
               </div>
             ))}
           </div>
@@ -332,14 +332,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <p className="mt-4 max-w-2xl text-weisuan-gray leading-relaxed">{t('caseDesc')}</p>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { icon: '🎓', client: '北京信息科技大学', deploy: '72h', outcome: '百人并发AI实训，设备利用率85%，竞赛获奖率+30%' },
-              { icon: '🏢', client: '华为算力中心', deploy: '48h', outcome: '数据互通+30%，模型加载缩短72%，昇腾+鲲鹏双认证' },
-              { icon: '📡', client: '中国移动', deploy: '—', outcome: '央企客户标杆，已签订100万+微算设备合同' },
-              { icon: '🔧', client: '亚信科技', deploy: '—', outcome: 'OEM集成合作，定制多套微算行业解决方案' },
-              { icon: '🏥', client: '某三甲医院', deploy: '48h', outcome: '医学影像AI辅助诊断，阅片效率+40%，数据零出院' },
-              { icon: '🏭', client: '某汽车零部件企业', deploy: '72h', outcome: 'AI视觉质检，缺陷检出率99.2%，年省180万退货损失' },
-              { icon: '🏦', client: '某城市商业银行', deploy: '1周', outcome: 'AI反欺诈+风控，月成本仅4千元，满足金融合规要求' },
-              { icon: '⚡', client: '某新能源电力集团', deploy: '48h', outcome: '风电预测性维护，故障提前72h预警，停机减少45%' },
+              { icon: '🎓', client: isZh ? '北京信息科技大学' : 'BISTU', deploy: '72h', outcome: isZh ? '百人并发AI实训，设备利用率85%，竞赛获奖率+30%' : '100+ concurrent AI training, 85% utilization, student awards +30%' },
+              { icon: '🏢', client: isZh ? '华为算力中心' : 'Huawei Compute Center', deploy: '48h', outcome: isZh ? '数据互通+30%，模型加载缩短72%，昇腾+鲲鹏双认证' : 'Data interop +30%, model loading -72%, Ascend+Kunpeng certified' },
+              { icon: '📡', client: isZh ? '中国移动' : 'China Mobile', deploy: '—', outcome: isZh ? '央企客户标杆，已签订100万+微算设备合同' : 'SOE benchmark client, ¥1M+ equipment contract signed' },
+              { icon: '🔧', client: isZh ? '亚信科技' : 'AsiaInfo', deploy: '—', outcome: isZh ? 'OEM集成合作，定制多套微算行业解决方案' : 'OEM integration, multiple custom industry solutions' },
+              { icon: '🏥', client: isZh ? '某三甲医院' : 'Top-tier Hospital', deploy: '48h', outcome: isZh ? '医学影像AI辅助诊断，阅片效率+40%，数据零出院' : 'AI-assisted imaging diagnosis, reading efficiency +40%, zero data leaving hospital' },
+              { icon: '🏭', client: isZh ? '某汽车零部件企业' : 'Auto Parts Manufacturer', deploy: '72h', outcome: isZh ? 'AI视觉质检，缺陷检出率99.2%，年省180万退货损失' : 'AI visual QC, 99.2% defect detection, ¥1.8M annual savings' },
+              { icon: '🏦', client: isZh ? '某城市商业银行' : 'City Commercial Bank', deploy: isZh ? '1周' : '1 week', outcome: isZh ? 'AI反欺诈+风控，月成本仅4千元，满足金融合规要求' : 'AI anti-fraud + risk control, only ¥4K/month, fully compliant' },
+              { icon: '⚡', client: isZh ? '某新能源电力集团' : 'Renewable Energy Group', deploy: '48h', outcome: isZh ? '风电预测性维护，故障提前72h预警，停机减少45%' : 'Wind power predictive maintenance, 72h early warning, 45% less downtime' },
             ].map((c, i) => (
               <div key={i} className="card-hover rounded-2xl bg-white p-6">
                 <div className="flex items-center gap-2">
@@ -374,15 +374,15 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </div>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { icon: '🏭', title: '智能制造', titleEn: 'Smart Manufacturing', desc: 'AI视觉质检、预测性维护、数字孪生' },
-              { icon: '🏥', title: '医疗健康', titleEn: 'Healthcare', desc: '影像AI诊断、药物研发、基因组分析' },
-              { icon: '🚗', title: '汽车产业', titleEn: 'Automotive', desc: '智能网联、自动驾驶、电池监测' },
-              { icon: '🏦', title: '金融行业', titleEn: 'Finance', desc: '智能风控、反欺诈检测、合规审计' },
+              { icon: '🏭', titleZh: '智能制造', titleEn: 'Smart Manufacturing', descZh: 'AI视觉质检、预测性维护、数字孪生', descEn: 'AI visual QC, predictive maintenance, digital twin' },
+              { icon: '🏥', titleZh: '医疗健康', titleEn: 'Healthcare', descZh: '影像AI诊断、药物研发、基因组分析', descEn: 'Medical imaging AI, drug discovery, genomics' },
+              { icon: '🚗', titleZh: '汽车产业', titleEn: 'Automotive', descZh: '智能网联、自动驾驶、电池监测', descEn: 'Connected vehicles, autonomous driving, battery monitoring' },
+              { icon: '🏦', titleZh: '金融行业', titleEn: 'Finance', descZh: '智能风控、反欺诈检测、合规审计', descEn: 'Risk management, anti-fraud, compliance audit' },
             ].map((item, i) => (
               <div key={i} className="card-hover rounded-2xl bg-white p-8">
                 <div className="text-3xl mb-4">{item.icon}</div>
-                <h3 className="text-lg font-semibold text-weisuan-black">{item.title}</h3>
-                <p className="mt-3 text-sm text-weisuan-gray leading-relaxed">{item.desc}</p>
+                <h3 className="text-lg font-semibold text-weisuan-black">{isZh ? item.titleZh : item.titleEn}</h3>
+                <p className="mt-3 text-sm text-weisuan-gray leading-relaxed">{isZh ? item.descZh : item.descEn}</p>
               </div>
             ))}
           </div>
@@ -405,7 +405,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <div className="flex items-center justify-center rounded-2xl border border-black-10 px-6 py-4 bg-white hover:border-weisuan-accent-30 transition-colors">
               <Image src="/image/北京大学logo.jpg" alt="北京大学" width={100} height={40} className="object-contain h-10" />
             </div>
-            {['寒武纪 Cambricon', 'NVIDIA', '中国移动', '亚信科技'].map((name, i) => (
+            {(isZh ? ['寒武纪 Cambricon', 'NVIDIA', '中国移动', '亚信科技'] : ['Cambricon', 'NVIDIA', 'China Mobile', 'AsiaInfo']).map((name, i) => (
               <div key={i} className="flex items-center justify-center rounded-2xl border border-black-10 px-6 py-4 text-sm font-medium text-weisuan-gray hover:border-weisuan-accent-30 transition-colors bg-white">
                 {name}
               </div>

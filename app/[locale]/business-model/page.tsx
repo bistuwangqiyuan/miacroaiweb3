@@ -37,7 +37,7 @@ export default async function BusinessModelPage({ params }: { params: Promise<{ 
               </tr>
             </thead>
             <tbody>
-              <tr className="border-b border-black-10"><td className="py-3 pr-4">{isZh ? '免费设备' : 'Free equipment'}</td><td className="py-3">100套微算（价值约1亿元），零加盟费</td></tr>
+              <tr className="border-b border-black-10"><td className="py-3 pr-4">{isZh ? '免费设备' : 'Free equipment'}</td><td className="py-3">{isZh ? '100套微算（价值约1亿元），零加盟费' : '100 Weisuàn units (worth ~¥100M), zero franchise fee'}</td></tr>
               <tr className="border-b border-black-10"><td className="py-3 pr-4">{isZh ? '股权/期权' : 'Equity'}</td><td className="py-3">{isZh ? '拟上市公司股份，共享上市收益' : 'Share in future listing'}</td></tr>
               <tr className="border-b border-black-10"><td className="py-3 pr-4">{isZh ? '收益分成' : 'Revenue share'}</td><td className="py-3">30-50%</td></tr>
             </tbody>
